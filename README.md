@@ -1,2 +1,2 @@
 # Pi-Assistant
-A customizable speech controlled assistant built using a Raspberry.
+A customizable speech controlled assistant built using a Raspberry Pi.
