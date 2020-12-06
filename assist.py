@@ -6,13 +6,13 @@ import speech_recognition as sr
 from rivescript import RiveScript
 
 import os 
-commands = ["takeoff", "land", "up", "down", "left", "turn", "touchdown", "exit", "flip", "barrel roll", "record",
-            "exit", "emergency", "end recording", "playback"]
-
-GOOGLE_CLOUD_SPEECH_CREDENTIALS = os.system['GOOGLE_CREDENTIALS']
+commands=[]
+GOOGLE_CLOUD_SPEECH_CREDENTIALS = os.getenv('GOOGLE_CLOUD_SPEECH_CREDENTIALS')
 if not GOOGLE_CLOUD_SPEECH_CREDENTIALS:
     print("Please set environment variable for cloud credentials.")
     exit(1)
+print(GOOGLE_CLOUD_SPEECH_CREDENTIALS)
+credentials = open(GOOGLE_CLOUD_SPEECH_CREDENTIALS, 'r').read()
 
 def main():
     command = ""
@@ -52,8 +52,7 @@ def voice_command(r):
             audio = r.listen(source)
         try:
             print("Command received. Processing...")
-            command = r.recognize_google_cloud(audio, credentials_json=GOOGLE_CLOUD_SPEECH_CREDENTIALS,
-                                               preferred_phrases=commands).lower()
+            command = r.recognize_google_cloud(audio, credentials_json=credentials, preferred_phrases=commands).lower()
             print('You said: ' + command + '\n')
             return command
         except sr.UnknownValueError:
