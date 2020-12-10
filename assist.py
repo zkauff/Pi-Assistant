@@ -24,7 +24,7 @@ def main():
     sr.pause_threshold = 0.5
 
     riveBot = RiveScript()
-    riveBot.load_directory("./commands")
+    riveBot.load_directory("./rive_commands")
     riveBot.sort_replies()
 
     while True:
